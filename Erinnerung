@@ -1,0 +1,40 @@
+
+-- einzeiliger Kommentar
+/*
+mehrzeiliger 
+Kommentar
+*/
+
+create database hochbau_001; -- database olusturma
+
+drop database hochbau_001; -- database silme
+
+use hochbau_001; -- database i kullanma
+
+create table tbl_abteilungen
+	(abteilungsNummer int primary key,
+    abteilungsName char(100));
+    
+create table tbl_baustellen
+	(baustellenNr char(4),
+    bastellenname char(200),
+    primary key(baustellenNr));
+    
+create table tbl_mitarbeiter
+	(mitarbeiterNR char(4) primary key,
+    mitarbeiterName char(100), 
+    mitarbezterPLZ char(5),
+    maschinenberechtigung bit,		-- bit boolean icin kullanilir
+    abteilungsNummer int,
+    foreign key (abteilungsNummer)references tbl_abteilungen(abteilungsNummer)); -- foreign key tanimlama 
+    
+create table ma_auf_baustelle
+(mitarbeiterNr char(4) references tbl_mitarbeter(mitarbeiterNr),		-- foreign key in dahil oldugu alan
+baustellenNr char(4) references tbl_baustellen(baustellenNr),
+stunden_auf_baustelle int,
+primary key (mitarbeiterNr, baustellenNr));    		-- 
+
+insert into tbl_abteilungen(abteilungsnummer,abteilungsname) values
+	(21, 'Vertrieb'),
+    (22, 'Lager und Logistik');
+    
